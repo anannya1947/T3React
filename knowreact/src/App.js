@@ -5,10 +5,10 @@ function App(){
   
   return (
     <div className="app">
-      <Tweet />
-      <Tweet />
-      <Tweet />
-      <Tweet />
+      <Tweet name="Alina" message="first tweet" likes="64"/>
+      <Tweet name="Aub" message="random tweet" likes="564"/>
+      <Tweet name="Sob" message="third tweet" likes="1064"/>
+      <Tweet name="Bob" message="nobody cares tweet" likes="634"/>
     </div>
   );
 }
