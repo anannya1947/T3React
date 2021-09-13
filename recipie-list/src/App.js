@@ -7,6 +7,8 @@ const App = () => {
   const APP_ID = "20b3d753";
   const APP_KEY = "05e84cda3944b64dad730cb86f1ff7ac";
 
+  const [recipe, setRecipe] = useState([]);
+
   //reloads content of the page at a specific instant
   useEffect(() =>{
     getRecipies();
@@ -16,7 +18,7 @@ const App = () => {
   const getRecipies = async () =>{
     const response = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${APP_ID}&app_key=${APP_KEY}`);
     const data = await response.json();
-    console.log(data.hits);
+    setRecipe(data.hits);
   };
 
   return (
