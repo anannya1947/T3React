@@ -33,6 +33,7 @@ const App = () => {
 
       {recipes.map(list => (
         <Recipe 
+          key={list.recipe.label}
           title={list.recipe.label}
           calories={list.recipe.calories}
           image={list.recipe.image}
