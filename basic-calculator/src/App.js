@@ -38,12 +38,24 @@ function App() {
     return numbers;
   }
 
+  const equals = () =>{
+    setResult(eval(result).toString());
+  }
+
+  const deleteLast = () =>{
+    if(calc === ""){
+      return;
+    }
+    const value = calc.slice(0, -1);
+    setResult(value);
+  }
+
   return (
     <div className="app">
       <div className="calci">
 
         <div className="display">
-          {result? <span>({result})</span> : "" }
+          {result? <span>({result})</span> : "" }&nbsp;
           {calc || 0}
         </div>
 
@@ -60,7 +72,7 @@ function App() {
           <button onClick={() => updateCalc('/')}>
             /
           </button>
-          <button>DEL</button>
+          <button onClick={deleteLast}>DEL</button>
         </div>
 
         <div className="digits">
@@ -71,7 +83,7 @@ function App() {
           <button onClick={() => updateCalc('.')}>
             .
           </button>
-          <button>=</button>
+          <button onClick={equals}>=</button>
         </div>
       </div>
     </div>
