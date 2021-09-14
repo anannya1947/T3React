@@ -1,36 +1,76 @@
-import React from "react";
+import React, {useState} from "react";
 
 function App() {
+
+  const [calc, setCalc] = useState("");
+  const [result, setResult] = useState("");
+
+  const operators = ['+', '-', '*', '/', '.'];
+
+  const updateCalc = value =>{
+    if(
+      operators.includes(value) && calc === "" ||
+      operators.includes(value) && operators.includes(calc.slice(-1))
+    ){
+      return;
+    }
+
+    setCalc(calc + value);
+
+    if(!operators.includes(value)){
+      setResult(eval(calc + value).toString());
+    }
+  }
 
   const generateDigits = () =>{
     const numbers = [];
 
     for(let i=1; i<10; i++){
-      numbers.push(<button key={i}>{i}</button>);
+      numbers.push(
+      <button 
+        onClick={() => updateCalc(i.toString())} 
+        key={i}>
+          {i}
+      </button>
+      );
     }
 
     return numbers;
   }
+
   return (
     <div className="app">
       <div className="calci">
 
         <div className="display">
-          <span>(0)</span>0
+          {result? <span>({result})</span> : "" }
+          {calc || 0}
         </div>
 
         <div className="operators">
-          <button>+</button>
-          <button>-</button>
-          <button>*</button>
-          <button>/</button>
+          <button onClick={() => updateCalc('+')}>
+            +
+          </button>
+          <button onClick={() => updateCalc('-')}>
+            -
+          </button>
+          <button onClick={() => updateCalc('*')}>
+            *
+          </button>
+          <button onClick={() => updateCalc('/')}>
+            /
+          </button>
           <button>DEL</button>
         </div>
 
         <div className="digits">
           {generateDigits()}
-          <button>0</button>
-          <button>.</button>
+          <button onClick={() => updateCalc('0')}>
+            0
+          </button>
+          <button onClick={() => updateCalc('.')}>
+            .
+          </button>
           <button>=</button>
         </div>
       </div>
